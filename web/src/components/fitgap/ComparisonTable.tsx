@@ -9,7 +9,7 @@ interface ComparisonTableProps {
 }
 
 // Old reports use expected_level; new ones send required_level.
-const requiredLevel = (c: SkillComparison) => c.required_level; // SEEDED FAULT: old-report fallback removed
+const requiredLevel = (c: SkillComparison) => c.required_level ?? c.expected_level;
 
 function ResultBadge({ comparison }: { comparison: SkillComparison }) {
   const label = FIT_GAP_RESULT_LABELS[comparison.result];
