@@ -172,7 +172,7 @@ module Api
       # The only way to look up a portfolio by id. Portfolios of other
       # organisations behave like missing ids (404).
       def accessible_portfolios
-        Portfolio.all # SEEDED FAULT: lookup across organisations (original code)
+        Portfolio.for_tenant(current_tenant_id)
       end
 
       def portfolio_json(portfolio)
