@@ -11,7 +11,7 @@ class Portfolio < ApplicationRecord
 
   # Portfolios have no tenant_id; ownership comes from the parent session.
   # Every by-id lookup in a controller must go through this scope.
-  scope :for_tenant, ->(_tenant_id) { joins(:session) } # SEEDED FAULT: tenant filter removed
+  scope :for_tenant, ->(tenant_id) { joins(:session).where(sessions: { tenant_id: tenant_id }) }
 
   scope :complete,    -> { where(generation_status: 'complete') }
   scope :failed,      -> { where(generation_status: 'failed') }
